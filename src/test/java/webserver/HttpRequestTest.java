@@ -19,24 +19,24 @@ public class HttpRequestTest {
 
     @ParameterizedTest
     @CsvSource(value = {"GET / HTTP/1.1, GET", "POST / HTTP/1.1, POST"})
-    void request_get_http_method(String requestRow, String method) {
-        HttpRequest request = new HttpRequest(requestRow);
+    void request_get_http_method(String requestRaw, String method) {
+        HttpRequest request = new HttpRequest(requestRaw);
 
         assertThat(request.getMethod()).isEqualTo(method);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"GET /index.html HTTP/1.1, /index.html", "GET / HTTP/1.1, /"})
-    void request_path(String requestRow, String path) {
-        HttpRequest request = new HttpRequest(requestRow);
+    void request_path(String requestRaw, String path) {
+        HttpRequest request = new HttpRequest(requestRaw);
 
         assertThat(request.getPath()).isEqualTo(path);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"GET /index.html HTTP/1.1, true", "GET / HTTP/1.1, false", "GET /menu/favicon.ico HTTP/1.1, true"})
-    void has_extension(String requestRow, boolean hasExtension) {
-        HttpRequest request = new HttpRequest(requestRow);
+    void has_extension(String requestRaw, boolean hasExtension) {
+        HttpRequest request = new HttpRequest(requestRaw);
 
         assertThat(request.hasExtension()).isEqualTo(hasExtension);
     }

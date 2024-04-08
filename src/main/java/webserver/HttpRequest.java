@@ -17,4 +17,8 @@ public class HttpRequest {
     public String getPath() {
         return path;
     }
+
+    public boolean hasExtension(){
+        return path.contains(".");
+    }
 }

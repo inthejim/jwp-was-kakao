@@ -32,4 +32,12 @@ public class HttpRequestTest {
 
         assertThat(request.getPath()).isEqualTo(path);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"GET /index.html HTTP/1.1, true", "GET / HTTP/1.1, false", "GET /menu/favicon.ico HTTP/1.1, true"})
+    void has_extension(String requestRow, boolean hasExtension) {
+        HttpRequest request = new HttpRequest(requestRow);
+
+        assertThat(request.hasExtension()).isEqualTo(hasExtension);
+    }
 }

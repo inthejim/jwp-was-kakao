@@ -22,7 +22,7 @@ public class HttpRequestTest {
     void request_get_http_method(String requestRow, String method) {
         HttpRequest request = new HttpRequest(requestRow);
 
-        assertThat(request.getHeader()).isEqualTo(method);
+        assertThat(request.getMethod()).isEqualTo(method);
     }
 
     @ParameterizedTest

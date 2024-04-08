@@ -16,7 +16,7 @@
 - [ ] GET /index.html을 응답한다.
     - [X] 요청에 대한 모든 메시지를 출력한다.
 
-- [ ] Request line 에서 Path를 추출한다.
+- [X] Request line 에서 Path를 추출한다.
 
 - [ ] Path에 해당하는 파일을 읽어 응답한다.
 

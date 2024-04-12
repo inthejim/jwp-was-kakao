@@ -6,7 +6,7 @@ import java.util.List;
 public class HttpRequest {
     private final StartLine startLine;
     private final Headers headers;
-    private final String body;
+    private String body;
 
     public HttpRequest(String request) {
         String[] split = request.split("\n");
@@ -14,6 +14,7 @@ public class HttpRequest {
 
         boolean isHeaders = true;
         List<String> headerList = new ArrayList<>();
+
         StringBuilder body = new StringBuilder();
         for (int i = 1; i < split.length; i++) {
             if (split[i].isBlank()) {
@@ -49,6 +50,10 @@ public class HttpRequest {
 
     public String getBody() {
         return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getAttribute(String key) {

@@ -1,19 +1,17 @@
 package webserver.http;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Headers {
-    private final Map<String, String> headers;
+    private Map<String, String> headers = new HashMap<>();
 
     public Headers(List<String> headers) {
-        this.headers = headers.stream()
+        this.headers.put("Content-Length", "0");
+        headers.stream()
                 .map(it -> it.split(":", 2))
-                .collect(Collectors.toMap(
-                        it -> it[0].trim(),
-                        it -> it[1].trim()
-                ));
+                .forEach(it -> this.headers.put(it[0], it[1].trim()));
     }
 
     public String get(String key) {

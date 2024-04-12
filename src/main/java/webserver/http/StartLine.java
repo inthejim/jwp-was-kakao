@@ -17,11 +17,18 @@ public class StartLine {
         this.method = split[0];
         this.uri = split[1];
         this.path = uri.split("\\?")[0];
-        this.extension = Extension.from(path.substring(path.lastIndexOf(".")));
+        this.extension = initExtension();
         if (uri.split("\\?").length == 2) {
             String queryString = uri.split("\\?")[1];
             initAttributes(queryString);
         }
+    }
+
+    private Extension initExtension() {
+        if (hasExtension()) {
+            return Extension.from(path.substring(path.lastIndexOf(".")));
+        }
+        return null;
     }
 
     private void initAttributes(String queryString) {

@@ -30,7 +30,7 @@ public enum Extension {
          return Arrays.stream(Extension.values())
                 .filter(it -> it.getValue().equals(extension.toLowerCase()))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("일치 하는 확장자가 없습니다."));
+                .orElseGet(null);
     }
 
     public String getValue() {

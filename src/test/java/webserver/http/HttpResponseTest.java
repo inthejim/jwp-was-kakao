@@ -42,7 +42,7 @@ class HttpResponseTest {
 
         response.setHeaders(headers);
 
-        assertThat(response.getHeaders()).contains(key + ": " + value);
+        assertThat(response.getHeaders()).contains(key + ": " + value + "\r\n");
     }
 
     @ParameterizedTest

@@ -1,7 +1,10 @@
 package webserver.handler;
 
 import utils.FileIoUtils;
-import webserver.http.*;
+import webserver.http.Extension;
+import webserver.http.HttpRequest;
+import webserver.http.HttpResponse;
+import webserver.http.HttpStatus;
 
 public class ResourceHandler implements Handler {
     @Override

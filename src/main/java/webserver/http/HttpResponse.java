@@ -27,25 +27,16 @@ public class HttpResponse {
         return new HttpResponse(HttpStatus.OK, new HashMap<>(), body);
     }
 
-    public void setStatusCode(HttpStatus statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
-    }
-
-    public void setBody(byte[] body) {
-        headers.put("Content-Length", String.valueOf(body.length));
-        this.body = body;
-    }
-
     public String getStartLine() {
         return "HTTP/1.1 " + statusCode.getValue() + " " + statusCode.getMessage();
     }
 
     public HttpStatus getStatusCode() {
         return statusCode;
+    }
+
+    public void setStatusCode(HttpStatus statusCode) {
+        this.statusCode = statusCode;
     }
 
     // TODO: View 쪽으로 넘기기
@@ -55,11 +46,20 @@ public class HttpResponse {
                 .collect(Collectors.toList());
     }
 
+    public void setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+    }
+
     public void addHeader(String key, String value) {
         headers.put(key, value);
     }
 
     public byte[] getBody() {
         return body;
+    }
+
+    public void setBody(byte[] body) {
+        headers.put("Content-Length", String.valueOf(body.length));
+        this.body = body;
     }
 }

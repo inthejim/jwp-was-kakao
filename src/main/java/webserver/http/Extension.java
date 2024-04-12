@@ -27,7 +27,7 @@ public enum Extension {
     }
 
     public static Extension from(String extension) {
-         return Arrays.stream(Extension.values())
+        return Arrays.stream(Extension.values())
                 .filter(it -> it.getValue().equals(extension.toLowerCase()))
                 .findAny()
                 .orElseGet(null);

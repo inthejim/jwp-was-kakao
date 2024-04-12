@@ -1,10 +1,9 @@
 package webserver.handler;
 
 import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
 
 public class RequestHandlerMapper {
-    public static Handler mapping(HttpRequest request, HttpResponse response) {
+    public static Handler mapping(HttpRequest request) {
         if (request.hasExtension()) {
             return new ResourceHandler();
         }

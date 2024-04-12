@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Headers {
-    private Map<String, String> headers;
+    private final Map<String, String> headers;
 
     public Headers(List<String> headers) {
         this.headers = headers.stream()

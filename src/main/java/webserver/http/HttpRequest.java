@@ -14,7 +14,7 @@ public class HttpRequest {
 
         boolean isHeaders = true;
         List<String> headerList = new ArrayList<>();
-        String body = "";
+        StringBuilder body = new StringBuilder();
         for (int i = 1; i < split.length; i++) {
             if (split[i].isBlank()) {
                 isHeaders = false;
@@ -24,11 +24,11 @@ public class HttpRequest {
                 headerList.add(split[i]);
                 continue;
             }
-            body += split[i];
+            body.append(split[i]);
         }
 
         this.headers = new Headers(headerList);
-        this.body = body;
+        this.body = body.toString();
     }
 
     public String getMethod() {

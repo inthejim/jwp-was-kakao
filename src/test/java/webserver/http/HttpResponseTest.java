@@ -65,6 +65,6 @@ class HttpResponseTest {
                         it -> it[0],
                         it -> it[1]
                 ));
-        System.out.println(collect.toString());
+        System.out.println(collect);
     }
 }

@@ -69,6 +69,6 @@ class StartLineTest {
     void extension() {
         StartLine startLine = new StartLine("GET /index.html HTTP/1.1");
 
-        assertThat(startLine.getExtension()).isEqualTo(".html");
+        assertThat(startLine.getExtension().toString()).isEqualTo(".html");
     }
 }

@@ -34,10 +34,8 @@ public class RequestHandler implements Runnable {
             HttpRequest httpRequest = new HttpRequest(request);
             HttpResponse httpResponse = new HttpResponse();
 
-            Handler handler = RequestHandlerMapper.mapping(httpRequest, httpResponse);
+            Handler handler = RequestHandlerMapper.mapping(httpRequest);
             handler.handling(httpRequest, httpResponse);
-
-            byte[] body = httpResponse.getBody();
 
             DataOutputStream dos = new DataOutputStream(out);
             response(dos, httpResponse);

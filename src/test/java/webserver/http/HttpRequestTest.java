@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import webserver.http.HttpRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

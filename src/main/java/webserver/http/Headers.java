@@ -19,4 +19,11 @@ public class Headers {
     public String get(String key) {
         return headers.get(key);
     }
+
+    @Override
+    public String toString() {
+        return "Headers{" +
+                "headers=" + headers +
+                '}';
+    }
 }

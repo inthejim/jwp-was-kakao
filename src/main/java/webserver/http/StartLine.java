@@ -63,4 +63,15 @@ public class StartLine {
     public Extension getExtension() {
         return this.extension;
     }
+
+    @Override
+    public String toString() {
+        return "StartLine{" +
+                "method='" + method + '\'' +
+                ", uri='" + uri + '\'' +
+                ", path='" + path + '\'' +
+                ", extension=" + extension +
+                ", attributes=" + attributes +
+                '}';
+    }
 }

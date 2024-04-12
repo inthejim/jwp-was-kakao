@@ -50,4 +50,13 @@ public class HttpRequest {
     public String getBody() {
         return body;
     }
+
+    @Override
+    public String toString() {
+        return "HttpRequest{" +
+                "startLine=" + startLine +
+                ", headers=" + headers +
+                ", body='" + body + '\'' +
+                '}';
+    }
 }

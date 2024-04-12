@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class HttpResponse {
     private HttpStatus statusCode;
     private Map<String, String> headers = new HashMap<>();
-    private byte[] body;
+    private byte[] body = new byte[0];
 
     public HttpResponse() {
     }

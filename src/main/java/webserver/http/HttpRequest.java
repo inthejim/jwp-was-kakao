@@ -51,6 +51,10 @@ public class HttpRequest {
         return body;
     }
 
+    public String getAttribute(String key) {
+        return headers.get(key);
+    }
+
     @Override
     public String toString() {
         return "HttpRequest{" +

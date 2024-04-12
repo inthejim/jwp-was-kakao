@@ -55,7 +55,7 @@ public class HttpResponse {
                 .collect(Collectors.toList());
     }
 
-    public void setHeader(String key, String value) {
+    public void addHeader(String key, String value) {
         headers.put(key, value);
     }
 

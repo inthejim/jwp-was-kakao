@@ -9,7 +9,7 @@ public class ResourceHandler implements Handler {
         try {
             Extension extension = httpRequest.getExtension();
             httpResponse.setStatusCode(HttpStatus.OK);
-            httpResponse.setHeader("Content-Type", extension.getContentType());
+            httpResponse.addHeader("Content-Type", extension.getContentType());
             httpResponse.setBody(FileIoUtils.loadFileFromClasspath(extension.getBasicFilePath() + httpRequest.getPath()));
         } catch (Exception e) {
             httpResponse = HttpResponse.error();

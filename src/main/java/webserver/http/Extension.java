@@ -1,5 +1,7 @@
 package webserver.http;
 
+import java.util.Arrays;
+
 public enum Extension {
     CSS(".css", MIME.CSS, ResourceType.STATIC),
     EOT(".eot", MIME.EOT, ResourceType.STATIC),
@@ -24,6 +26,13 @@ public enum Extension {
         this.resourceType = resourceType;
     }
 
+    public static Extension from(String extension) {
+         return Arrays.stream(Extension.values())
+                .filter(it -> it.getValue().equals(extension.toLowerCase()))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("일치 하는 확장자가 없습니다."));
+    }
+
     public String getValue() {
         return value;
     }
@@ -34,5 +43,13 @@ public enum Extension {
 
     public ResourceType getResourceType() {
         return resourceType;
+    }
+
+    public String getBasicFilePath() {
+        return resourceType.getBasicFilePath();
+    }
+
+    public String getContentType() {
+        return mime.getContentType();
     }
 }

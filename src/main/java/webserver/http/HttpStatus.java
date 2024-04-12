@@ -1,11 +1,12 @@
-package webserver;
+package webserver.http;
 
 import java.util.Arrays;
 
 public enum HttpStatus {
     OK(200, "OK"),
     FORBIDDEN(403, "Forbidden"),
-    NOT_FOUND(404, "Not Found");
+    NOT_FOUND(404, "Not Found"),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error");
 
     private final int value;
     private final String message;

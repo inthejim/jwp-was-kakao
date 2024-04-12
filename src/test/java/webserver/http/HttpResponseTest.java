@@ -1,12 +1,15 @@
-package webserver;
+package webserver.http;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import utils.Encoder;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,7 +42,7 @@ class HttpResponseTest {
 
         response.setHeaders(headers);
 
-        assertThat(response.getHeaders()).containsEntry(key, value);
+        assertThat(response.getHeaders()).contains(key + ": " + value);
     }
 
     @ParameterizedTest
@@ -50,5 +53,18 @@ class HttpResponseTest {
         response.setBody(body);
 
         assertThat(response.getBody()).isEqualTo(body);
+    }
+
+    @Test
+    void name() {
+        String string = "user=jason&user2=jason2&user3=jason3";
+
+        Map<String, String> collect = Arrays.stream(string.split("&"))
+                .map(it -> it.split("="))
+                .collect(Collectors.toMap(
+                        it -> it[0],
+                        it -> it[1]
+                ));
+        System.out.println(collect.toString());
     }
 }

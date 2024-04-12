@@ -1,4 +1,4 @@
-package webserver;
+package webserver.http;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import webserver.http.HttpRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,5 +40,19 @@ public class HttpRequestTest {
         HttpRequest request = new HttpRequest(requestRaw);
 
         assertThat(request.hasExtension()).isEqualTo(hasExtension);
+    }
+
+    @Test
+    void no_body(){
+        HttpRequest request = new HttpRequest("method uri version\nkey:value\n\n");
+
+        assertThat(request.getBody()).isEqualTo("");
+    }
+
+    @Test
+    void body(){
+        HttpRequest request = new HttpRequest("method uri version\nkey: value\n\nbody");
+
+        assertThat(request.getBody()).isEqualTo("body");
     }
 }

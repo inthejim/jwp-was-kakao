@@ -13,17 +13,17 @@
 
 # 기능 요구사항 - 1단계
 
-- [ ] GET /index.html을 응답한다.
+- [X] GET /index.html을 응답한다.
     - [X] 요청에 대한 모든 메시지를 출력한다.
 
 - [X] Request line 에서 Path를 추출한다.
 
-- [ ] Path에 해당하는 파일을 읽어 응답한다.
+- [X] Path에 해당하는 파일을 읽어 응답한다.
   - [X] 파일을 읽는다.
-  - [ ] 파일을 요청에 따라 응답한다.
+  - [X] 파일을 요청에 따라 응답한다.
 
-- [ ] CSS 지원하기
-    - [ ] StyleSheet 파일을 지원하도록 구현한다.
+- [X] CSS 지원하기
+    - [X] StyleSheet 파일을 지원하도록 구현한다.
 
 - [ ] QueryString 파싱
     - [ ] 회원 가입 매뉴를 클릭하면 `http://localhost:8080/user/form.html` 로 이동하면서 회원가입을 한다.

@@ -9,6 +9,7 @@ public class StartLine {
     private final String method;
     private final String uri;
     private final String path;
+    private final Extension extension;
     private Map<String, String> attributes = new HashMap<>();
 
     public StartLine(String line) {
@@ -16,6 +17,7 @@ public class StartLine {
         this.method = split[0];
         this.uri = split[1];
         this.path = uri.split("\\?")[0];
+        this.extension = Extension.from(path.substring(path.lastIndexOf(".")));
         if (uri.split("\\?").length == 2) {
             String queryString = uri.split("\\?")[1];
             initAttributes(queryString);
@@ -45,5 +47,13 @@ public class StartLine {
 
     public String getAttribute(String key) {
         return attributes.get(key);
+    }
+
+    public boolean hasExtension() {
+        return path.contains(".");
+    }
+
+    public Extension getExtension() {
+        return this.extension;
     }
 }

@@ -64,4 +64,11 @@ class StartLineTest {
                 () -> assertThat(startLine.getAttribute("password")).isEqualTo("1234")
         );
     }
+
+    @Test
+    void extension() {
+        StartLine startLine = new StartLine("GET /index.html HTTP/1.1");
+
+        assertThat(startLine.getExtension()).isEqualTo(".html");
+    }
 }

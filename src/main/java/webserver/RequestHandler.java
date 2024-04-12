@@ -1,13 +1,16 @@
 package webserver;
 
-import java.io.*;
-import java.net.Socket;
-import java.util.Objects;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.FileIoUtils;
 import utils.RequestReaderUtils;
+import webserver.handler.Handler;
+import webserver.handler.RequestHandlerMapper;
+import webserver.http.HttpRequest;
+import webserver.http.HttpResponse;
+
+import java.io.*;
+import java.net.Socket;
+import java.util.List;
 
 public class RequestHandler implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(RequestHandler.class);
@@ -26,17 +29,53 @@ public class RequestHandler implements Runnable {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             String request = RequestReaderUtils.read(reader);
-            HttpRequest httpRequest = new HttpRequest(request);
+            logger.debug(request);
 
-            if (Objects.equals(httpRequest.getMethod(), "GET")) {
-                byte[] body = FileIoUtils.loadFileFromClasspath(httpRequest.getPath());
-            }
+            HttpRequest httpRequest = new HttpRequest(request);
+            HttpResponse httpResponse = new HttpResponse();
+
+            Handler handler = RequestHandlerMapper.mapping(httpRequest, httpResponse);
+            handler.handling(httpRequest, httpResponse);
+
+            byte[] body = httpResponse.getBody();
 
             DataOutputStream dos = new DataOutputStream(out);
-            byte[] body = "Hello World".getBytes();
-            response200Header(dos, body.length);
-            responseBody(dos, body);
+            response(dos, httpResponse);
         } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    private void response(DataOutputStream dos, HttpResponse response) {
+        responseStartLine(dos, response.getStartLine());
+        responseHeaders(dos, response.getHeaders());
+        responseBody(dos, response.getBody());
+    }
+
+    private void responseStartLine(DataOutputStream dos, String startLine) {
+        try {
+            dos.writeBytes(startLine + "\r\n");
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    private void responseHeaders(DataOutputStream dos, List<String> headers) {
+        headers.forEach(it -> {
+            try {
+                dos.writeBytes(it);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+            }
+        });
+    }
+
+    private void responseBody(DataOutputStream dos, byte[] body) {
+        try {
+            dos.writeBytes("\r\n");
+            dos.write(body, 0, body.length);
+            dos.flush();
+        } catch (IOException e) {
             logger.error(e.getMessage());
         }
     }
@@ -47,15 +86,6 @@ public class RequestHandler implements Runnable {
             dos.writeBytes("Content-Type: text/html;charset=utf-8\r\n");
             dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
             dos.writeBytes("\r\n");
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-    }
-
-    private void responseBody(DataOutputStream dos, byte[] body) {
-        try {
-            dos.write(body, 0, body.length);
-            dos.flush();
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

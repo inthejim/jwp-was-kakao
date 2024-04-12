@@ -13,16 +13,16 @@ public enum MIME {
     WOFF("font/woff", "font"),
     WOFF2("font/woff2", "font");
 
-    private final String value;
+    private final String contentType;
     private final String type;
 
-    MIME(String value, String type) {
-        this.value = value;
+    MIME(String contentType, String type) {
+        this.contentType = contentType;
         this.type = type;
     }
 
-    public String getValue() {
-        return value;
+    public String getContentType() {
+        return contentType;
     }
 
     public String getType() {

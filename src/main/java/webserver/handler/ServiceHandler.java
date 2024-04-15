@@ -16,34 +16,41 @@ public class ServiceHandler implements Handler {
         httpResponse.setStatusCode(HttpStatus.OK);
 
         if (httpRequest.getMethod().equals("GET")) {
-
-            if (httpRequest.getPath().equals("/user/create")) {
-                String userId = httpRequest.getAttribute("userId");
-                String name = httpRequest.getAttribute("name");
-                String password = httpRequest.getAttribute("password");
-                String email = httpRequest.getAttribute("email");
-
-                DataBase.addUser(new User(userId, password, name, email));
-
-                httpResponse.setStatusCode(HttpStatus.FOUND);
-                httpResponse.addHeader("Location", "/index.html");
-            }
+            doGet(httpRequest, httpResponse);
         }
 
         if (httpRequest.getMethod().equals("POST")) {
-            if (httpRequest.getPath().equals("/user/create")) {
-                String body = httpRequest.getBody();
-                Map<String, String> userParameters = KeyValueParser.parse(body);
-                String userId = userParameters.get("userId");
-                String name = userParameters.get("name");
-                String password = userParameters.get("password");
-                String email = userParameters.get("email");
+            doPost(httpRequest, httpResponse);
+        }
+    }
 
-                DataBase.addUser(new User(userId, password, name, email));
+    private static void doPost(HttpRequest httpRequest, HttpResponse httpResponse) {
+        if (httpRequest.getPath().equals("/user/create")) {
+            String body = httpRequest.getBody();
+            Map<String, String> userParameters = KeyValueParser.parse(body);
+            String userId = userParameters.get("userId");
+            String name = userParameters.get("name");
+            String password = userParameters.get("password");
+            String email = userParameters.get("email");
 
-                httpResponse.setStatusCode(HttpStatus.FOUND);
-                httpResponse.addHeader("Location", "/index.html");
-            }
+            DataBase.addUser(new User(userId, password, name, email));
+
+            httpResponse.setStatusCode(HttpStatus.FOUND);
+            httpResponse.addHeader("Location", "/index.html");
+        }
+    }
+
+    private static void doGet(HttpRequest httpRequest, HttpResponse httpResponse) {
+        if (httpRequest.getPath().equals("/user/create")) {
+            String userId = httpRequest.getAttribute("userId");
+            String name = httpRequest.getAttribute("name");
+            String password = httpRequest.getAttribute("password");
+            String email = httpRequest.getAttribute("email");
+
+            DataBase.addUser(new User(userId, password, name, email));
+
+            httpResponse.setStatusCode(HttpStatus.FOUND);
+            httpResponse.addHeader("Location", "/index.html");
         }
     }
 }

@@ -27,7 +27,7 @@ public class ServiceHandler implements Handler {
     private static void doPost(HttpRequest httpRequest, HttpResponse httpResponse) {
         if (httpRequest.getPath().equals("/user/create")) {
             String body = httpRequest.getBody();
-            Map<String, String> userParameters = KeyValueParser.parse(body);
+            Map<String, String> userParameters = KeyValueParser.parse(body, "&");
             String userId = userParameters.get("userId");
             String name = userParameters.get("name");
             String password = userParameters.get("password");

@@ -5,14 +5,14 @@ import utils.KeyValueParser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StartLine {
+public class RequestStartLine {
     private final String method;
     private final String uri;
     private final String path;
     private final Extension extension;
     private Map<String, String> attributes = new HashMap<>();
 
-    public StartLine(String line) {
+    public RequestStartLine(String line) {
         String[] split = line.split(" ");
         this.method = split[0];
         this.uri = split[1];

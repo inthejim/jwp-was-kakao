@@ -8,6 +8,7 @@ import java.util.Map;
 public class RequestStartLine {
     private final String method;
     private final String uri;
+    private final String version;
     private final String path;
     private final Extension extension;
     private Map<String, String> attributes = new HashMap<>();
@@ -16,6 +17,7 @@ public class RequestStartLine {
         String[] split = line.split(" ");
         this.method = split[0];
         this.uri = split[1];
+        this.version = split[2];
         this.path = uri.split("\\?")[0];
         this.extension = initExtension();
         if (uri.split("\\?").length == 2) {
@@ -41,6 +43,10 @@ public class RequestStartLine {
 
     public String getUri() {
         return uri;
+    }
+
+    public String getVersion() {
+        return version;
     }
 
     public String getPath() {

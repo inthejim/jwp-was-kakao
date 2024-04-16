@@ -37,15 +37,15 @@ public class HttpRequest {
     }
 
     public String getPath() {
-        return requestStartLine.getPath();
+        return requestStartLine.getUri().getPath();
     }
 
     public Extension getExtension() {
-        return requestStartLine.getExtension();
+        return requestStartLine.getUri().getExtension();
     }
 
     public boolean hasExtension() {
-        return requestStartLine.hasExtension();
+        return requestStartLine.getUri().getExtension()!=null;
     }
 
     public String getBody() {

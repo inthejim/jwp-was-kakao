@@ -4,6 +4,7 @@ import utils.KeyValueParser;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Uri {
     private String path;
@@ -36,5 +37,18 @@ public class Uri {
 
     public String getAttribute(String key) {
         return attributes.get(key);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Uri uri = (Uri) o;
+        return Objects.equals(path, uri.path) && extension == uri.extension && Objects.equals(attributes, uri.attributes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(path, extension, attributes);
     }
 }

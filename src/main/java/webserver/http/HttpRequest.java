@@ -6,7 +6,7 @@ import java.util.List;
 public class HttpRequest {
     private final StartLine startLine;
     private final Headers headers;
-    private String body;
+    private Body body;
 
     public HttpRequest(String request) {
         String[] split = request.split("\n");
@@ -29,7 +29,7 @@ public class HttpRequest {
         }
 
         this.headers = new Headers(headerList);
-        this.body = body.toString();
+        this.body = new Body(body.toString());
     }
 
     public String getMethod() {
@@ -49,11 +49,11 @@ public class HttpRequest {
     }
 
     public String getBody() {
-        return body;
+        return body.getBody();
     }
 
     public void setBody(String body) {
-        this.body = body;
+        this.body = new Body(body);
     }
 
     public String getAttribute(String key) {

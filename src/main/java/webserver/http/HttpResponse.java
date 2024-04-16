@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HttpResponse {
-    private HttpStatus statusCode;
+
+    private ResponseStatusLine responseStatusLine;
     private Map<String, String> headers = new HashMap<>();
     private byte[] body = new byte[0];
 
@@ -14,7 +15,7 @@ public class HttpResponse {
     }
 
     private HttpResponse(HttpStatus statusCode, Map<String, String> headers, byte[] body) {
-        this.statusCode = statusCode;
+        this.responseStatusLine = new ResponseStatusLine(statusCode);
         this.headers = headers;
         this.body = body;
     }
@@ -27,16 +28,17 @@ public class HttpResponse {
         return new HttpResponse(HttpStatus.OK, new HashMap<>(), body);
     }
 
-    public String getStartLine() {
-        return "HTTP/1.1 " + statusCode.getValue() + " " + statusCode.getMessage();
+
+    public String getStatusLine() {
+        return responseStatusLine.getVersion() + " " + responseStatusLine.getStatusCode() + " " + responseStatusLine.getStatusMessage();
     }
 
     public HttpStatus getStatusCode() {
-        return statusCode;
+        return responseStatusLine.getStatus();
     }
 
     public void setStatusCode(HttpStatus statusCode) {
-        this.statusCode = statusCode;
+        this.responseStatusLine = new ResponseStatusLine(statusCode);
     }
 
     // TODO: View 쪽으로 넘기기

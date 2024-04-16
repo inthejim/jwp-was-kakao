@@ -21,7 +21,6 @@ class HttpResponseTest {
         response.setStatusCode(httpStatus);
 
         assertThat(response.getStatusCode()).isEqualTo(httpStatus);
-
     }
 
     @ParameterizedTest
@@ -30,7 +29,7 @@ class HttpResponseTest {
         HttpResponse response = new HttpResponse();
         response.setStatusCode(httpStatus);
 
-        assertThat(response.getStartLine()).isEqualTo("HTTP/1.1 " + httpStatus.getValue() + " " + httpStatus.getMessage());
+        assertThat(response.getStatusLine()).isEqualTo("HTTP/1.1 " + httpStatus.getValue() + " " + httpStatus.getMessage());
     }
 
     @ParameterizedTest

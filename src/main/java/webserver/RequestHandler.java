@@ -50,7 +50,7 @@ public class RequestHandler implements Runnable {
     }
 
     private void response(DataOutputStream dos, HttpResponse response) {
-        responseStartLine(dos, response.getStartLine());
+        responseStartLine(dos, response.getStatusLine());
         responseHeaders(dos, response.getHeaders());
         responseBody(dos, response.getBody());
     }

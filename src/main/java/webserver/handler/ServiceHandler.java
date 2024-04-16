@@ -10,6 +10,7 @@ import webserver.http.HttpStatus;
 import java.util.Map;
 
 public class ServiceHandler implements Handler {
+    public static final String CREATE_USER_PATH = "/user/create";
 
     @Override
     public void handling(HttpRequest httpRequest, HttpResponse httpResponse) {
@@ -24,33 +25,17 @@ public class ServiceHandler implements Handler {
         }
     }
 
-    private static void doPost(HttpRequest httpRequest, HttpResponse httpResponse) {
-        if (httpRequest.getPath().equals("/user/create")) {
-            String body = httpRequest.getBody();
-            Map<String, String> userParameters = KeyValueParser.parse(body, "&");
-            String userId = userParameters.get("userId");
-            String name = userParameters.get("name");
-            String password = userParameters.get("password");
-            String email = userParameters.get("email");
-
-            DataBase.addUser(new User(userId, password, name, email));
+    private void doPost(HttpRequest httpRequest, HttpResponse httpResponse) {
+        String body = httpRequest.getBody();
+        if (httpRequest.getPath().equals(CREATE_USER_PATH)) {
+            UserService.addUser(KeyValueParser.parse(body, "&"));
 
             httpResponse.setStatusCode(HttpStatus.FOUND);
             httpResponse.addHeader("Location", "/index.html");
         }
     }
 
-    private static void doGet(HttpRequest httpRequest, HttpResponse httpResponse) {
-        if (httpRequest.getPath().equals("/user/create")) {
-            String userId = httpRequest.getAttribute("userId");
-            String name = httpRequest.getAttribute("name");
-            String password = httpRequest.getAttribute("password");
-            String email = httpRequest.getAttribute("email");
-
-            DataBase.addUser(new User(userId, password, name, email));
-
-            httpResponse.setStatusCode(HttpStatus.FOUND);
-            httpResponse.addHeader("Location", "/index.html");
-        }
+    private void doGet(HttpRequest httpRequest, HttpResponse httpResponse) {
+        //TODO
     }
 }

@@ -31,5 +31,6 @@ class KeyValueParserTest {
     void empty() {
         String input = "";
         Map<String, String> parsed = KeyValueParser.parse(input, "&");
+        assertThat(parsed.size()).isZero();
     }
 }

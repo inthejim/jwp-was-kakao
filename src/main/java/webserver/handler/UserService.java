@@ -8,8 +8,15 @@ import java.util.Map;
 public class UserService {
     public static void addUser(Map<String, String> userParameters) {
         validate(userParameters);
+        notDuplicatedUser(userParameters);
         User user = new User(userParameters);
         DataBase.addUser(user);
+    }
+
+    public static void notDuplicatedUser(Map<String, String> userParameters){
+        if(DataBase.findUserById(userParameters.get("userID"))!=null){
+            throw new IllegalArgumentException("같은 아이디가 존재합니다");
+        }
     }
 
     public static void validate(Map<String, String> userParameters) {
